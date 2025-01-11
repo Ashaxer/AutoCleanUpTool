@@ -25,6 +25,7 @@ if not base_path.exists() or not base_path.is_dir():
     print(f"Error: Directory '{base_path}' does not exist.")
     exit(1)
 
+# Step 3: Determine log file name and path
 current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 log_file_name = f"{log_file_base}_{current_time}.log"
 if not log_absolute_path:
@@ -32,17 +33,17 @@ if not log_absolute_path:
 log_file_path = Path(log_file_name)
 log_file_path.parent.mkdir(parents=True, exist_ok=True)  # Ensure log directory exists
 
-# Step 3: Find files matching the pattern
+# Step 4: Find files matching the pattern
 pattern = re.compile(files_pattern)
 matching_files = [f for f in base_path.iterdir() if f.is_file() and pattern.match(f.name)]
 
-# Step 4: Sort files by modification time
+# Step 5: Sort files by modification time
 if delete_by_date:
     matching_files.sort(key=lambda x: x.stat().st_mtime)  # Sort by modified time
 else:
     matching_files.sort(key=lambda x: x.name) #Sort by Name
 
-# Step 5: Determine files to delete
+# Step 6: Determine files to delete
 files_to_delete = matching_files[:-files_to_keep]  # Keep the newest files_to_keep files
 
 # Step 7: Delete the oldest files and log the actions
