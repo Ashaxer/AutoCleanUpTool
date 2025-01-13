@@ -1,5 +1,8 @@
 # AutoCleanUpTool
 This scripts automatically deletes files based on the configuration.
+
+Can be used to automatically delete older backups and always keep the specific number of newest backups if you are having storage issues.
+
 Simple...
 
 # Declaimar
